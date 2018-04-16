@@ -1,2 +1,4 @@
 <h1><%= @post.title %></h1>
 <h2><%= link_to @post.user.username, @post.user %></h2>
+<hr>
+<%= link_to "Back to All Posts", posts_path %> || <%= link_to "Edit Post", edit_post_path %>

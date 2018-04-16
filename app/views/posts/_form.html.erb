@@ -1,0 +1,16 @@
+<% if flash[:errors] %>
+<h2>Errors: </h2>
+<ul>
+  <% flash[:errors].each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for @post do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+
+<%= f.collection_select :user_id, @users, :id, :username %>
+<%= f.submit %>
+<% end %>
