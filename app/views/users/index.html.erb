@@ -1,8 +1,6 @@
-<h1> All Users: </h1>
+<h1>All Users | <%= link_to "All Posts", posts_path %></h1>
 <ul>
   <% @users.each do |user| %>
   <li> <%= link_to user.username, user %> || <%= link_to "delete", user, method: "delete" %> </li>
   <% end %>
 </ul>
-<hr>
-<%= link_to "Create User", new_user_path %>

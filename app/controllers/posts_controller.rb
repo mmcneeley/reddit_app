@@ -1,11 +1,18 @@
 class PostsController < ApplicationController
+
 before_action :get_post, only:[:show, :edit, :update, :destroy]
+before_action :require_login
+skip_before_action :require_login, only:[:new, :create]
 
   def index
     @posts = Post.all
   end
 
   def show
+    #list all the comments
+    @comments = @post.comments
+    #this is for the commenting to get a random user, until we have auth
+    @user_sample = User.all.sample
   end
 
   def new
@@ -41,11 +48,15 @@ before_action :get_post, only:[:show, :edit, :update, :destroy]
   private
 
   def post_params
-    params.require(:post).permit(:title, :user_id)
+    params.require(:post).permit(:title, :user_id, :url)
   end
 
   def get_post
     @post = Post.find(params[:id])
+  end
+
+  def require_login
+    return head(:forbidden) unless session.include? :user_id
   end
 
 end
