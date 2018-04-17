@@ -1,11 +1,15 @@
 class PostsController < ApplicationController
-before_action :get_post, only:[:show, :edit, :update, :destroy]
+before_action :get_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all
   end
 
   def show
+    #list all the comments
+    @comments = @post.comments
+    #this is for the commenting to get a random user, until we have auth
+    @user_sample = User.all.sample
   end
 
   def new
