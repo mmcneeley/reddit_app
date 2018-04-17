@@ -1,4 +1,4 @@
-<h1> All Posts: </h1>
+<h1>All Posts | <%= link_to "All Users", users_path %></h1>
 <ul>
   <% @posts.each do |post| %>
   <li> <%= link_to post.title, post %> || <%= link_to "delete", post, method: "delete" %>  </li>
