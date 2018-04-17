@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
 before_action :get_post, only:[:show, :edit, :update, :destroy]
 before_action :require_login
 skip_before_action :require_login, only:[:new, :create]
@@ -8,6 +9,10 @@ skip_before_action :require_login, only:[:new, :create]
   end
 
   def show
+    #list all the comments
+    @comments = @post.comments
+    #this is for the commenting to get a random user, until we have auth
+    @user_sample = User.all.sample
   end
 
   def new
@@ -53,6 +58,5 @@ skip_before_action :require_login, only:[:new, :create]
   def require_login
     return head(:forbidden) unless session.include? :user_id
   end
-
 
 end

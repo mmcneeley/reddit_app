@@ -1,8 +1,30 @@
 <h1><%= @post.title %></h1>
+
 <% if working_url?(@post.url) %>
-<h2><a href="<%= @post.url %>"><img border="0" src="<%= get_image %>" style="max-height: 500px; max-width: 500px;"></a>
-<br> <%= link_to get_title.first, @post.url %></h2>
+  <h2>
+    <a href="<%= @post.url %>"><img border="0" src="<%= get_image %>" style="max-height: 500px; max-width: 500px;"></a>
+    <br> 
+    <%= link_to get_title.first, @post.url %>
+  </h2>
 <% end %>
 <h3>User: <%= link_to @post.user.username, @post.user %></h3>
+
+<% if @comments.any? %>
+<h2>Comments:</h2>
+<ul>
+  <% @comments.each do |c| %>
+  <li>"<%= c.content %>" by <%= c.user.username %> | <%= link_to "delete", post_comment_path(c), method: 'delete' %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<p>Add a comment:</p>
+<%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
+  <%= text_field_tag :content %>
+  <%= hidden_field_tag :post_id, @post.id %>
+  <%= hidden_field_tag :user_id, @user_sample.id %>
+  <%= submit_tag "Add Comment" %>
+<% end %>
+
 <hr>
 <%= link_to "Back to All Posts", posts_path %> || <%= link_to "Edit Post", edit_post_path %>
