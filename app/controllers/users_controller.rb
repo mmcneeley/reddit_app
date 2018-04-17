@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :get_user, only:[:show,:edit,:update]
+  before_action :require_login
+  skip_before_action :require_login, only:[:new, :create]
+
 
     def index
       @users = User.all
@@ -15,8 +18,9 @@ class UsersController < ApplicationController
     def create
       @user = User.create(user_params)
       if @user.valid?
-        flash[:success] = "you have created a new user"
-        redirect_to user_path(@user)
+        flash[:success] = "You have signed up for Roddit!"
+        session[:user_id] = @user.id
+        redirect_to @user
       else
         #byebug
         flash[:errors] = @user.errors.full_messages
@@ -45,7 +49,11 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :email)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    end
+
+    def require_login
+      return head(:forbidden) unless session.include? :user_id
     end
 
 end
