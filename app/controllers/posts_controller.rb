@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 before_action :get_post, only:[:show, :edit, :update, :destroy]
+before_action :require_login
+skip_before_action :require_login, only:[:new, :create]
 
   def index
     @posts = Post.all
@@ -47,5 +49,10 @@ before_action :get_post, only:[:show, :edit, :update, :destroy]
   def get_post
     @post = Post.find(params[:id])
   end
+
+  def require_login
+    return head(:forbidden) unless session.include? :user_id
+  end
+
 
 end
