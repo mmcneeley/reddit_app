@@ -1,3 +1,4 @@
+
 <% if flash[:errors] %>
 <h2>Errors: </h2>
 <ul>
@@ -10,6 +11,9 @@
 <%= form_for @post do |f| %>
 <%= f.label :title %>
 <%= f.text_field :title %>
+
+<%= f.label :url %>
+<%= f.text_field :url %>
 
 <%= f.collection_select :user_id, @users, :id, :username %>
 <%= f.submit %>
