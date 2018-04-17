@@ -3,11 +3,17 @@
 <% if working_url?(@post.url) %>
   <h2>
     <a href="<%= @post.url %>"><img border="0" src="<%= get_image %>" style="max-height: 500px; max-width: 500px;"></a>
-    <br> 
+    <br>
     <%= link_to get_title.first, @post.url %>
   </h2>
 <% end %>
 <h3>User: <%= link_to @post.user.username, @post.user %></h3>
+<h3>Description: <%=@post.content%></h3>
+<p>
+  <% get_tags_name["keywords"].each do |tags| %>
+  Tags: <%= tags %>
+  <% end %>
+</p>
 
 <% if @comments.any? %>
 <h2>Comments:</h2>
