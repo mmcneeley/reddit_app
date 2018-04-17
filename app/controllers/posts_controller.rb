@@ -43,7 +43,7 @@ skip_before_action :require_login, only:[:new, :create]
   private
 
   def post_params
-    params.require(:post).permit(:title, :user_id)
+    params.require(:post).permit(:title, :user_id, :url)
   end
 
   def get_post

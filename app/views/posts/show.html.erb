@@ -1,4 +1,8 @@
 <h1><%= @post.title %></h1>
-<h2><%= link_to @post.user.username, @post.user %></h2>
+<% if working_url?(@post.url) %>
+<h2><a href="<%= @post.url %>"><img border="0" src="<%= get_image %>" style="max-height: 500px; max-width: 500px;"></a>
+<br> <%= link_to get_title.first, @post.url %></h2>
+<% end %>
+<h3>User: <%= link_to @post.user.username, @post.user %></h3>
 <hr>
 <%= link_to "Back to All Posts", posts_path %> || <%= link_to "Edit Post", edit_post_path %>
