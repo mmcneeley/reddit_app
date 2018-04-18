@@ -1,5 +1,6 @@
-<h1>Sign Up for Roddit</h1>
+<div class="jumbotron text-center"><h1>Sign Up for a new account on Wrotetit</h1></div>
 <hr>
+<div class="container-fluid">
  <%= form_for @user do |f| %>
   <%= f.label :username %>
   <%= f.text_field :username %>
@@ -11,3 +12,4 @@
   <hr>
   <%= f.submit "Sign Up" %>
  <% end %>
+</div>
