@@ -32,3 +32,10 @@ love_code = Post.create(title: "I love to code, don't you?", user: mike, topic: 
 Comment.create(content: 'great post!', user: joe, post: movie_review)
 Comment.create(content: 'totally agree!', user: mike, post: yankees)
 Comment.create(content: 'loved this!', user: henry, post: love_code)
+
+#votes
+Vote.create(value: 1, post: yankees, user: mike)
+Vote.create(value: 1, post: yankees, user: joe)
+Vote.create(value: -1, post: yankees, user: henry)
+Vote.create(value: 1, post: love_code, user: mike)
+Vote.create(value: 1, post: love_code, user: joe)
