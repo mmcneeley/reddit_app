@@ -5,7 +5,7 @@ before_action :require_login
 skip_before_action :require_login, only:[:new, :create]
 
   def index
-    @posts = Post.all
+    @posts = Post.where(["tags like ?","%#{params[:search]}%"])
   end
 
   def show
@@ -23,6 +23,7 @@ skip_before_action :require_login, only:[:new, :create]
   def create
     @post = Post.create(post_params)
     if @post.valid?
+      add_scraped_tags
       flash[:success] = "you created a post!"
       redirect_to @post
     else
@@ -36,8 +37,15 @@ skip_before_action :require_login, only:[:new, :create]
   end
 
   def update
-    @post.update(post_params)
-    redirect_to @post
+    if @post.valid?
+      @post.update(post_params)
+      add_scraped_tags
+      redirect_to @post
+      flash[:success] = "you edited a post!"
+    else
+      flash[:errors] = @post.errors.full_messages
+      redirect_to edit_post_path
+    end
   end
 
   def destroy
@@ -47,8 +55,14 @@ skip_before_action :require_login, only:[:new, :create]
 
   private
 
+  def add_scraped_tags
+    first_two = get_tags_name["keywords"][0]
+    @post.tags = first_two
+    @post.save
+  end
+
   def post_params
-    params.require(:post).permit(:title, :user_id, :url)
+    params.require(:post).permit(:title, :user_id, :url, :content, :search, :tags)
   end
 
   def get_post
