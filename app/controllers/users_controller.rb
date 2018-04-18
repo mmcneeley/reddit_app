@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :get_user, only:[:show,:edit,:update]
-  before_action :require_login
-  skip_before_action :require_login, only:[:new, :create]
-
+    #before_action :require_login
+    #skip_before_action :require_login, only:[:new, :create]
+    before_action :authorized?, only: [:update, :destroy]
 
     def index
       @users = User.all
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect_to @user
       else
-        #byebug
         flash[:errors] = @user.errors.full_messages
         redirect_to new_user_path
       end
@@ -52,8 +51,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 
-    def require_login
-      return head(:forbidden) unless session.include? :user_id
-    end
+    # def require_login
+    #   return head(:forbidden) unless session.include? :user_id
+    # end
 
 end

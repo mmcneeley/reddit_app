@@ -2,22 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   require 'nokogiri'
+  require 'uri'
   require 'open-uri'
   require 'metainspector'
   require 'net/http'
-
-  helper_method :web_scraper, :get_title, :get_image, :working_url?
+  require "validate_url"
+  helper_method :get_title, :get_image, :working_url?, :get_tags_name
   helper_method :logged_in?
   helper_method :current_user
-  helper_method :authorize
+  #helper_method :authorized?
 
   def working_url?(url)
-   url = URI.parse(url) rescue false
-   url.kind_of?(URI::HTTP) || url.kind_of?(URI::HTTPS)
-  end
-
-  def web_scraper
-    Nokogiri::HTML(open(url))
+    uri = URI.parse(url)
+    uri.is_a?(URI::HTTP) && !uri.host.nil?
+    rescue URI::InvalidURIError
+    false
   end
 
   def get_title
@@ -32,9 +31,15 @@ class ApplicationController < ActionController::Base
     page.images.best
   end
 
+  def get_tags_name
+      page = MetaInspector.new(@post.url)
+      page.meta_tags['name']
+  end
+
   def current_user
     if session[:user_id]
       User.find(session[:user_id])
+    else
     end
   end
 
@@ -42,8 +47,9 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def authorize
-    redirect_to login_path unless current_user
+  def authorized?
+    #redirect_to login_path unless current_user
+    redirect_to login_path unless logged_in?
   end
 
 end

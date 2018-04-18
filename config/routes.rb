@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-resources :posts do
-  resources :comments
-end
+
+  resources :posts do
+    resources :comments
+  end
+
 resources :users
+resources :topics
 
 get 'signup', to: 'users#new', as: 'signup'
 get 'login', to:'session#new', as: 'login'
