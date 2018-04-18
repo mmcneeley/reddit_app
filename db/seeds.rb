@@ -39,3 +39,15 @@ Vote.create(value: 1, post: yankees, user: joe)
 Vote.create(value: -1, post: yankees, user: henry)
 Vote.create(value: 1, post: love_code, user: mike)
 Vote.create(value: 1, post: love_code, user: joe)
+
+#tags
+Tag.create(name: "Sports")
+Tag.create(name: "Henry")
+Tag.create(name: "Tech")
+Tag.create(name: "Animals")
+Tag.create(name: "Christian Kim")
+#post_tags
+PostTag.create(post_id: yankees.id, tag_id: 1)
+PostTag.create(post_id: movie_review.id, tag_id: 2)
+PostTag.create(post_id: car_accident.id, tag_id: 3)
+PostTag.create(post_id: love_code.id, tag_id: 4)
