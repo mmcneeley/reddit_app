@@ -1,20 +1,25 @@
 
-<% if flash[:errors] %>
-<h2>Errors: </h2>
-<ul>
-  <% flash[:errors].each do |error| %>
-    <li><%= error %></li>
+<% if logged_in? %>
+  <% if flash[:errors] %>
+  <h2>Errors: </h2>
+  <ul>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
 
-<%= form_for @post do |f| %>
-<%= f.label :title %>
-<%= f.text_field :title %>
+  <%= form_for @post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
 
-<%= f.label :url %>
-<%= f.text_field :url %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
 
-<%= f.collection_select :user_id, @users, :id, :username %>
-<%= f.submit %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <%= f.submit %>
+  <% end %>
+<% else %>
+  <div>Please <%= link_to "login", login_path %> first.</div>
 <% end %>
