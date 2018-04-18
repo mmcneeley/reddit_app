@@ -11,7 +11,9 @@
   </ul>
   <ul>
     <% @posts.each do |post| %>
-    <li> <%= link_to post.title, post %> || <%= link_to "delete", post, method: "delete" %>  </li>
+    <li>
+      <%= link_to post.title, post %> (Score: <%= post.score %> | <%= link_to "Up", post_votes_up_path(post), method:'post' %> | <%= link_to "Down", post_votes_down_path(post), method:'post' %>) | <%= link_to "delete", post, method: "delete" %>
+    </li>
     <% end %>
   </ul>
   <hr>
