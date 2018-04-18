@@ -1,28 +1,28 @@
 
-<% if flash[:errors] %>
-<h2>Errors: </h2>
-<ul>
-  <% flash[:errors].each do |error| %>
-    <li><%= error %></li>
+<% if logged_in? %>
+  <% if flash[:errors] %>
+  <h2>Errors: </h2>
+  <ul>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
 
 <%= form_for @post do |f| %>
-<%= f.label :title %><br>
-<%= f.text_field :title %><br>
-<br>
-<%= f.label :url %><br>
-<%= f.text_field :url %><br>
-<br>
-<%= f.label :tags %><br>
-<%= f.text_field :tags %><br>
-<br>
-<%= f.label :description %><br>
-<%= f.text_area :content %><br>
-<br>
-<%= f.collection_select :user_id, @users, :id, :username %>
-<%= f.collection_select :topic_id, @topics, :id, :name %>
-
-<%= f.submit %>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %><br>
+  <br>
+  <%= f.label :url %><br>
+  <%= f.text_field :url %><br>
+  <br>
+  <%= f.label :tags %><br>
+  <%= f.text_field :tags %><br>
+  <br>
+  <%= f.label :description %><br>
+  <%= f.text_area :content %><br>
+  <br>
+  <%= f.collection_select :topic_id, @topics, :id, :name %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.submit %>
 <% end %>

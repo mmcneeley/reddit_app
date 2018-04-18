@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :authorized?, only: [:create, :update, :destroy]
+
   def index
     @post = Post.find(params[:post_id])
     @comments = @post.comments

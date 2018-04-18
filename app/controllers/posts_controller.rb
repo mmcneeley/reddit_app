@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
 
-before_action :get_post, only:[:show, :edit, :update, :destroy]
-before_action :require_login
-skip_before_action :require_login, only:[:new, :create]
+  before_action :get_post, only:[:show, :edit, :update, :destroy]
+  #before_action :require_login
+  #skip_before_action :require_login, only:[:new, :create]
+  before_action :authorized?, only: [:create, :update, :destroy]
 
   def index
     @posts = Post.where(["tags like ?","%#{params[:search]}%"])
@@ -71,8 +72,8 @@ skip_before_action :require_login, only:[:new, :create]
     @post = Post.find(params[:id])
   end
 
-  def require_login
-    return head(:forbidden) unless session.include? :user_id
-  end
+  # def require_login
+  #   return head(:forbidden) unless session.include? :user_id
+  # end
 
 end

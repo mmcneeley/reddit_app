@@ -31,16 +31,20 @@
             <% end %>
           </div>
       </div>
-
-<div class='jumbotron'><p>Add a comment:</p>
-  <%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
-    <%= text_field_tag :content %>
-    <%= hidden_field_tag :post_id, @post.id %>
-    <%= hidden_field_tag :user_id, @user_sample.id %>
-    <!--- in order to creae clickable buttons --->
-    <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-     <i class="icon-ok icon-white"></i> Comment
-   <% end %>
+<div class='jumbotron'>
+ <p>Add a comment:</p>
+  <% if logged_in? %>
+    <%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
+      <%= text_field_tag :content %>
+      <%= hidden_field_tag :post_id, @post.id %>
+      <%= hidden_field_tag :user_id, current_user.id %>
+      <!--- in order to create clickable buttons --->
+      <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <i class="icon-ok icon-white"></i> Comment
+      <% end %>
+    <% end %>
+  <% else %>
+    <div>Please <%= link_to "login", login_path %> first.</div>
   <% end %>
 </div>
 
