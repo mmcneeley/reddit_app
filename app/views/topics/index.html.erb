@@ -1,0 +1,7 @@
+<div class='jumbotron text-center'><h1>Hot Topics on Wroteit</h1></div>
+
+<div class="container-fluid">
+  <% @topics.each do |topic| %>
+  <h3> <%= link_to topic.name, topic %> </h3>
+  <% end %>
+</div>

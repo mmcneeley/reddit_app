@@ -18,6 +18,7 @@ skip_before_action :require_login, only:[:new, :create]
   def new
     @post = Post.new
     @users = User.all
+    @topics = Topic.all
   end
 
   def create
@@ -32,6 +33,7 @@ skip_before_action :require_login, only:[:new, :create]
   end
 
   def edit
+    @topics = Topic.all
     @users = User.all
   end
 
@@ -48,7 +50,7 @@ skip_before_action :require_login, only:[:new, :create]
   private
 
   def post_params
-    params.require(:post).permit(:title, :user_id, :url)
+    params.require(:post).permit(:title, :user_id, :url, :topic_id)
   end
 
   def get_post

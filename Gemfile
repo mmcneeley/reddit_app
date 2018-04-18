@@ -6,6 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 gem 'metainspector'
+
+gem 'bootstrap', '~> 4.1.0'
+# Use for styling our web-app
 gem 'bcrypt', '~> 3.1.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
