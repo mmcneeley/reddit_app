@@ -1,34 +1,47 @@
 <div class='jumbotron text-center'><h1>Topic: <%=@post.topic.name%></h1></div>
-
-
-<div class="container-fluid">
-  <div class='.col-lg-'><h2>Title: <%= @post.title %></h2></div>
-    <div class='.col-sm-'><% if working_url?(@post.url) %>
-      <h2> <a href="<%= @post.url %>"><img border="0" src="<%= get_image %>" style="max-height: 500px; max-width: 500px;"></a></div>
-          <%= link_to get_title.first, @post.url %>
-        </h2>
+  <div class="container-fluid">
+    <div class='.col-lg-'>
+      <h2>Title: <%= @post.title %></h2>
+    </div>
+    <div class='.col-sm-'>
+      <% if working_url?(@post.url) %>
+        <h2>
+          <a href="<%= @post.url %>">
+            <img border="0" src="<%= get_image %>" style="max-height: 500px; max-width: 500px;">
+          </a>
+      </div>
+      <%= link_to get_title.first, @post.url %>
+      </h2>
+      <p>
+        <% get_tags_name["keywords"].each do |tags| %>
+          Tags: <%= tags %>
         <% end %>
-        <h6>Submitted by: <%= link_to @post.user.username, @post.user %></h6>
-      <div class='col-xl'>
-          <% if @comments.any? %>
-          <h5>Comments:</h5>
-            <ul>
-            <% @comments.each do |c| %>
-              <li>"<%= c.content %>" by <%= c.user.username %> | <%= link_to "delete", post_comment_path(c), method: 'delete' %></li>
+      </p>
+      <% end %>
+      <h6>Submitted by: <%= link_to @post.user.username, @post.user %></h6>
+      <h3>Description: <%=@post.content%></h3>
+        <div class='col-xl'>
+            <% if @comments.any? %>
+            <h5>Comments:</h5>
+              <ul>
+              <% @comments.each do |c| %>
+                <li>"<%= c.content %>" by <%= c.user.username %> | <%= link_to "delete", post_comment_path(c), method: 'delete' %></li>
+              <% end %>
+              </ul>
             <% end %>
-            </ul>
-          <% end %>
-        </div>
+          </div>
       </div>
 
 <div class='jumbotron'><p>Add a comment:</p>
-<%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
-  <%= text_field_tag :content %>
-  <%= hidden_field_tag :post_id, @post.id %>
-  <%= hidden_field_tag :user_id, @user_sample.id %>
-  <!--- in order to creae clickable buttons --->
-  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-   <i class="icon-ok icon-white"></i> Comment
- <% end %>
-<% end %>
+  <%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
+    <%= text_field_tag :content %>
+    <%= hidden_field_tag :post_id, @post.id %>
+    <%= hidden_field_tag :user_id, @user_sample.id %>
+    <!--- in order to creae clickable buttons --->
+    <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+     <i class="icon-ok icon-white"></i> Comment
+   <% end %>
+  <% end %>
 </div>
+
+<%= link_to "Edit Post", edit_post_path %>

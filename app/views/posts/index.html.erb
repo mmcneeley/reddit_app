@@ -1,15 +1,21 @@
 <div class='jumbotron text-center'><h1>The Current Posts on Wroteit</h1></div>
-
-
-
 <div class="container-fluid">
   <ul>
-  <% @posts.each do |post| %>
+    <%= form_tag posts_path, method: "get" do %>
+      <%= label_tag :q, "Search By Tag:" %><br>
+      <br>
+      <%= text_field_tag :search, params[:search] %><br>
+      <br>
+      <%= submit_tag "Search" %>
+    <% end %> <br>
+  </ul>
+  <ul>
+    <% @posts.each do |post| %>
     <li> <%= link_to post.title, post %> || <%= link_to "delete", post, method: "delete" %>  </li>
     <% end %>
   </ul>
   <hr>
   <%= button_tag(type: 'submit', class: "btn btn-dark") do %>
-  <i class="icon-ok icon-white"><%= link_to "Create Post", new_post_path %></i>
-<% end %>
+    <i class="icon-ok icon-white"><%= link_to "Create Post", new_post_path %></i>
+  <% end %>
 </div>
