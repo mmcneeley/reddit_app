@@ -22,5 +22,7 @@
 <%= f.text_area :content %><br>
 <br>
 <%= f.collection_select :user_id, @users, :id, :username %>
+<%= f.collection_select :topic_id, @topics, :id, :name %>
+
 <%= f.submit %>
 <% end %>
