@@ -6,7 +6,12 @@ class PostsController < ApplicationController
   before_action :authorized?, only: [:create, :update, :destroy]
 
   def index
-    @posts = Post.where(["tags like ?","%#{params[:search]}%"])
+    # @posts = Post.where(["tags like ?","%#{params[:search]}%"])
+    if params[:search]
+      @posts = Post.search(params[:search])
+    else
+      @posts = Post.all
+    end
   end
 
   def show
@@ -25,7 +30,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.create(post_params)
     if @post.valid?
-      add_scraped_tags
+      if @post.url.length > 0
+       add_scraped_tags
+      end
       flash[:success] = "you created a post!"
       redirect_to @post
     else
@@ -40,9 +47,11 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post.update(post_params)
     if @post.valid?
-      @post.update(post_params)
-      add_scraped_tags
+        if @post.url
+          add_scraped_tags
+        end
       redirect_to @post
       flash[:success] = "you edited a post!"
     else
@@ -59,8 +68,8 @@ class PostsController < ApplicationController
   private
 
   def add_scraped_tags
-    first_two = get_tags_name["keywords"][0]
-    @post.tags = first_two
+    tags = get_tags_name["keywords"][0]
+    @post.tags = tags
     @post.save
   end
 

@@ -32,8 +32,8 @@ class ApplicationController < ActionController::Base
   end
 
   def get_tags_name
-    page = MetaInspector.new(@post.url)
-    page.meta_tags['name']
+      page = MetaInspector.new(@post.url)
+      page.meta_tags['name']
   end
 
   def current_user

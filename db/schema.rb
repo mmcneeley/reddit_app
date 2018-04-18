@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20180417234652) do
     t.text "content"
     t.integer "user_id"
     t.integer "topic_id"
-    t.string "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tags"
     t.index ["topic_id"], name: "index_posts_on_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
