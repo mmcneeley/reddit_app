@@ -1,4 +1,3 @@
-
 <% if logged_in? %>
 
   <% if flash[:errors] %>
@@ -11,19 +10,18 @@
   <% end %>
 
   <%= form_for @post do |f| %>
-    <%= f.label :title %><br>
+    <%= f.label "Title (Required)" %><br>
     <%= f.text_field :title %><br>
     <br>
-    <%= f.label :url %><br>
+    <%= f.label "URL (Optional)" %><br>
     <%= f.text_field :url %><br>
     <br>
-    <!-- <%= f.label :tags %><br>
-    <%= f.text_field :tags %><br> -->
-    <br>
-    <%= f.label :description %><br>
+    <%= f.label "Description (Optional)" %><br>
     <%= f.text_area :content %><br>
-    <br>
+
+    <%= f.label "Topic (Required)" %><br>
     <%= f.collection_select :topic_id, @topics, :id, :name %>
+    <br><br>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.submit %>
   <% end %>

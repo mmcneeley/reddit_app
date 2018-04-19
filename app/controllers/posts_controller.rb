@@ -23,15 +23,17 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @users = User.all
+    #@users = User.all #i dont think we need this -mm
     @topics = Topic.all
   end
 
   def create
     @post = Post.create(post_params)
     if @post.valid?
-      if @post.url.length > 0
-       add_scraped_tags
+      if working_url?(@post.url)
+        add_scraped_tags
+        get_image
+        get_title
       end
       flash[:success] = "you created a post!"
       redirect_to @post
@@ -49,8 +51,11 @@ class PostsController < ApplicationController
   def update
     @post.update(post_params)
     if @post.valid?
-        if @post.url
+        if working_url?(@post.url)
+          @post.tags.destroy_all
           add_scraped_tags
+          get_image
+          get_title
         end
       redirect_to @post
       flash[:success] = "you edited a post!"
@@ -68,15 +73,51 @@ class PostsController < ApplicationController
   private
 
   def add_scraped_tags
-    keywords = get_tags_name["keywords"][0].split(", ")
-    keywords.each do |keyword|
-    @tags = Tag.find_or_create_by(name: keyword)
-    @post.tags << @tags
+    tag_results = get_tags_name["keywords"]
+    if tag_results != nil
+      tags = tag_results[0].split(", ")
+      tags.each do |tag|
+        @tags = Tag.find_or_create_by(name: tag)
+        @post.tags << @tags
+      end
     end
   end
 
+  def working_url?(url)
+    uri = URI.parse(url)
+    uri.is_a?(URI::HTTP) && !uri.host.nil?
+    rescue URI::InvalidURIError
+    false
+  end
+
+  def get_title
+    page = Nokogiri::HTML(open(@post.url))
+    web_title = []
+    web_title << page.css('title')[0].text
+    title = web_title
+    if title.first != nil
+      @post.link_title = title.first
+      @post.save
+    end
+  end
+
+  def get_image
+    page = MetaInspector.new(@post.url)
+    image = page.images.best
+    if image != nil
+      @post.image_url = image
+      @post.save
+    end
+  end
+
+  def get_tags_name
+    page = MetaInspector.new(@post.url)
+    page.meta_tags['name']
+  end
+
   def post_params
-    params.require(:post).permit(:title, :user_id, :url, :content, :search, :tags, :topic_id)
+    # params.require(:post).permit(:title, :user_id, :url, :content, :search, :tags, :topic_id) - removing the :tags, and :search -mm
+    params.require(:post).permit(:title, :user_id, :url, :content, :topic_id)
   end
 
   def get_post
