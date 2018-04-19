@@ -1,0 +1,12 @@
+<div class='jumbotron text-center'><h1>Tag: <%=@tag.name%></h1></div>
+  <div class="container-fluid">
+    <div class='.col-lg-'>
+      <h2>Posts with tag: </h2>
+    </div>
+    <ul>
+      <li>
+        <% @tag.posts.each do |post|  %>
+        <%= link_to post.title, post  %><br>
+        <% end %>
+      </li>
+    </ul>

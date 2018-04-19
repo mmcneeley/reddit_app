@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post '/votes/down' => 'votes#down'
     #delete '/posts/:post_id/votes/clear' => 'votes#vote_clear'
   end
-
+resources :tags
 resources :users
 resources :topics
 
