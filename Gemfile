@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 gem "validate_url"
 gem 'metainspector'
-
+gem 'obscenity'
 gem 'bootstrap', '~> 4.1.0'
 # Use for styling our web-app
 gem 'bcrypt', '~> 3.1.7'
