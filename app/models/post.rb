@@ -10,9 +10,19 @@ require 'obscenity/active_model'
   # validates :url, url: { allow_blank: true }
   validates :title,  obscenity: { sanitize: true, replacement: "@!#%"}
   validates :content,  obscenity: { sanitize: true, replacement: "@!#%"}
-def self.search(search)
 
-end
+  def self.search(search)
+    p = Post.all
+    a = []
+    p.each do |post|
+      post.tags.each do |tag|
+        if tag.name.downcase == search.downcase
+          a << post
+        end
+      end
+    end
+    a
+  end
 
 
 
