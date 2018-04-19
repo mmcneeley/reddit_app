@@ -11,7 +11,6 @@ joe = User.create(username: "jayzonday", email: "joseph.moloughney@flatironschoo
 henry = User.create(username: "kinghenryjr", email: "henry.zhang@flatironschool.com", password:"1234")
 mike = User.create(username: "mmcneeley", email: "michael.mcneeley@flatironschool.com", password:"12345")
 
-
 #topics
 technology = Topic.create(name: "Technology")
 sports = Topic.create(name: "Sports")
@@ -20,7 +19,6 @@ cars = Topic.create(name: "Cars")
 food = Topic.create(name: "Food")
 health = Topic.create(name: "Health")
 lifestyle = Topic.create(name: "Lifestyle")
-
 
 #posts
 yankees = Post.create(title: "yankees win!", user: joe, topic: sports)
@@ -46,6 +44,7 @@ Tag.create(name: "Henry")
 Tag.create(name: "Tech")
 Tag.create(name: "Animals")
 Tag.create(name: "Christian Kim")
+
 #post_tags
 PostTag.create(post_id: yankees.id, tag_id: 1)
 PostTag.create(post_id: movie_review.id, tag_id: 2)
