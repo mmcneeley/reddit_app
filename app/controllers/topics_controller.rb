@@ -22,7 +22,7 @@ before_action :get_topic, only:[:show]
   private
 
   def topic_params
-    params.require(:topic).permit(:name, :search)
+   params.require(:topic).permit(:name, :search)
   end
 
   def get_topic
