@@ -9,8 +9,13 @@ class Post < ApplicationRecord
   # validates :url, url: { allow_blank: true }
 
   def self.search(search)
-    t = Tag.where("name like ?", "%#{search}%")
+  
   end
+
+  # def self.search(search)
+  #   t = Tag.where("name like ?", "%#{search}%")
+  # end
+
 
   def score
     self.votes.sum(:value)

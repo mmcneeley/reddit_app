@@ -2,12 +2,12 @@
 <div class="container-fluid">
 
   <ul>
-    <%= form_tag tags_path, method: "get" do %>
-      <%= label_tag :q, "Search Tags:" %><br>
+    <%= form_tag '', method: "get" do %>
+      <%= label_tag :q, "Filter Tags:" %><br>
       <br>
       <%= text_field_tag :search, params[:search] %><br>
       <br>
-      <%= submit_tag "Search" %>
+      <%= submit_tag "Filter" %>
     <% end %> <br>
   </ul>
 
