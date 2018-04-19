@@ -1,15 +1,6 @@
 <div class='jumbotron text-center'><h1>Hot Topics on Wroteit</h1></div>
 
 <div class="container-fluid">
-
-  <%= form_tag topics_path, method: "get" do %>
-    <%= label_tag :op, "Search By Topic:" %><br>
-    <br>
-    <%= text_field_tag :search, params[:search] %><br>
-    <br>
-    <%= submit_tag "Filter Topics" %>
-  <% end %>
-  <br>
   <% @topics.each do |topic| %>
   <h3> <%= link_to topic.name, topic %> </h3>
   <% end %>
