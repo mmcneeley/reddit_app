@@ -2,11 +2,7 @@ class TopicsController < ApplicationController
 before_action :get_topic, only:[:show]
 
   def index
-    if params[:search]
-      @topics = Topic.search(params[:search])
-    else
-      @topics = Topic.all
-    end
+    @topics = Topic.all
   end
 
   def new
@@ -22,7 +18,7 @@ before_action :get_topic, only:[:show]
   private
 
   def topic_params
-    params.require(:topic).permit(:name, :search)
+    params.require(:topic).permit(:name)
   end
 
   def get_topic
