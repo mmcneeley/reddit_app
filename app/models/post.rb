@@ -17,7 +17,7 @@ def foul_words
   bad_words = ["shit","fuck","ass","fucker","motherfucker","bitch", "slut", "fag", "pussy", "dick"]
   bad_words.each do |word|
     if title.downcase.include?(word) || content.downcase.include?(word)
-    errors.add(:foul_words,"- Wash your hands out with soap, that language ain't tolerated on Wroteit!")
+    errors.add(:foul_words,"- Wash your hands with some quaility soap, that language ain't gon' be tolerated on Wroteit!")
     end
   end
 end
