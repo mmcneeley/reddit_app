@@ -1,0 +1,22 @@
+<div class='jumbotron text-center'><h1>Tags:</h1></div>
+<div class="container-fluid">
+
+  <ul>
+    <%= form_tag '', method: "get" do %>
+      <%= label_tag :q, "Filter Tags:" %><br>
+      <br>
+      <%= text_field_tag :search, params[:search] %><br>
+      <br>
+      <%= submit_tag "Filter" %>
+    <% end %> <br>
+  </ul>
+
+  <ul>
+    <% @tags.each do |tag| %>
+    <li>
+      <%= link_to tag.name, tag %>
+    </li>
+    <% end %>
+  </ul>
+  <hr>
+</div>

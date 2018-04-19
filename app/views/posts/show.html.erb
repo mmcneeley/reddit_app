@@ -13,9 +13,7 @@
       <%= link_to get_title.first, @post.url %>
       </h2>
       <p>
-        <% get_tags_name["keywords"].each do |tags| %>
-          Tags: <%= tags %>
-        <% end %>
+          Tags: <% @post.tags.each do |t| %> <%= link_to t.name, t %> <% end %>
       </p>
       <% end %>
       <h6>Submitted by: <%= link_to @post.user.username, @post.user %></h6>

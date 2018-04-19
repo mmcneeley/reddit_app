@@ -68,9 +68,11 @@ class PostsController < ApplicationController
   private
 
   def add_scraped_tags
-    tags = get_tags_name["keywords"][0]
-    @post.tags = tags
-    @post.save
+    keywords = get_tags_name["keywords"][0].split(", ")
+    keywords.each do |keyword|
+    @tags = Tag.find_or_create_by(name: keyword)
+    @post.tags << @tags
+    end
   end
 
   def post_params
