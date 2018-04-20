@@ -9,9 +9,13 @@ class SessionController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to session[:return_to] || posts_path
+      if session[:return_to] = 'http://localhost:3000/login'
+        redirect_to posts_path
+      else
+        redirect_to session[:return_to] || posts_path
+      end
     else
-      flash[:errors] = "Username/Password combo is invalid" #adjust new view
+      flash[:login_errors] = "Username/Password combo is invalid" #adjust new view
       redirect_to login_path
     end
   end

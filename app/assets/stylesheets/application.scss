@@ -302,3 +302,30 @@ body {
   margin: 75px;
   font-size: 3rem;
 }
+
+.post-form {
+  margin: 50px;
+}
+
+.post-shell {
+  background-color: white;
+  padding: 30px;
+}
+.post-header {
+  width: 100%;
+}
+
+.post-header-left {
+  float:left;
+  width: 40%;
+}
+
+.post-header-right {
+  float:left;
+  width: 40%;
+  text-algin: left;
+}
+
+.post-header-right a {
+  font-size: 2.5rem;
+}
