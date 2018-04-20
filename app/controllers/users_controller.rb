@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     def create
       @user = User.create(user_params)
       if @user.valid?
-        flash[:success] = "You have signed up for Roddit!"
+        flash[:success] = "You have signed up for Wroteit!"
         session[:user_id] = @user.id
         redirect_to @user
       else
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation)
     end
 
     # def require_login

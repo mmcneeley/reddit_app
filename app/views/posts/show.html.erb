@@ -1,49 +1,53 @@
-<div class='jumbotron text-center'><h1>Topic: <%=@post.topic.name%></h1></div>
-  <div class="container-fluid">
-    <div class='.col-lg-'>
-      <h2>Title: <%= @post.title %></h2>
-    </div>
-    <div class='.col-sm-'>
-      <% if @post.url %>
-        <h2>
-          <a href="<%= @post.url %>">
-            <img border="0" src="<%= @post.image_url %>" style="max-height: 500px; max-width: 500px;">
-          </a>
-      </div>
-      <%= link_to @post.link_title, @post.url %>
-      </h2>
-      <p>
-          Tags: <% @post.tags.each do |t| %> <%= link_to t.name, t %> <% end %>
-      </p>
-      <% end %>
-      <h6>Submitted by: <%= link_to @post.user.username, @post.user %></h6>
-      <h3>Description: <%=@post.content%></h3>
-        <div class='col-xl'>
-            <% if @comments.any? %>
-            <h5>Comments:</h5>
-              <ul>
-              <% @comments.each do |c| %>
-                <li>"<%= c.content %>" by <%= c.user.username %> | <%= link_to "delete", post_comment_path(c), method: 'delete' %></li>
-              <% end %>
-              </ul>
-            <% end %>
-          </div>
-      </div>
-<div class='jumbotron'>
- <p>Add a comment:</p>
-  <% if logged_in? %>
-    <%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
-      <%= text_field_tag :content %>
-      <%= hidden_field_tag :post_id, @post.id %>
-      <%= hidden_field_tag :user_id, current_user.id %>
-      <!--- in order to create clickable buttons --->
-      <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-        <i class="icon-ok icon-white"></i> Comment
-      <% end %>
+<div class='jumbotron text-left clearfix'>
+  <h1><%=@post.topic.name%> – <%= @post.title %></h1><br><br>
+  <%=@post.content%> - <%= link_to @post.user.username, @post.user %>
+  <div class="search-box">
+    <%= button_tag(type: 'submit', class: "btn btn-light") do %>
+      <i class="icon-ok icon-white"><%= link_to "Edit Post", edit_post_path(@post) %></i>
     <% end %>
-  <% else %>
-    <div>Please <%= link_to "login", login_path %> first.</div>
-  <% end %>
+  </div>
 </div>
 
-<%= link_to "Edit Post", edit_post_path %>
+<div class="post-shell">
+  <% if @post.url %>
+    <div class="post-header clearfix">
+      <div class="post-header-left">
+        <img border="0" src="<%= @post.image_url %>" style="max-height: 500px; max-width: 500px;">
+      </div>
+      <div class="post-header-right">
+        <h2><%= link_to @post.link_title, @post.url %></h2>
+      </div>
+    </div>
+  Tags: <% @post.tags.each do |t| %> <%= link_to t.name, t %> <% end %>
+  <% end %>
+
+  <br>
+  <br>
+
+  <% if @comments.any? %>
+  <h4>Comments:</h4>
+    <ul>
+    <% @comments.each do |c| %>
+      <li>"<%= c.content %>" by <%= c.user.username %> | <%= link_to "delete", post_comment_path(c), method: 'delete' %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <div class='jumbotron'>
+   <p>Add a comment:</p>
+    <% if logged_in? %>
+      <%= form_tag("/posts/#{@post.id}/comments", method: 'POST') do %>
+        <%= text_field_tag :content %>
+        <%= hidden_field_tag :post_id, @post.id %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <!--- in order to create clickable buttons --->
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          <i class="icon-ok icon-white"></i> Comment
+        <% end %>
+      <% end %>
+    <% else %>
+      <div>Please <%= link_to "login", login_path %> first.</div>
+    <% end %>
+  </div>
+
+</div>

@@ -1,31 +1,36 @@
-<% if logged_in? %>
+<div class="flex-container clearfix">
 
-  <% if flash[:errors] %>
-  <h2>Errors: </h2>
-  <ul>
-    <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  </ul>
+  <% if logged_in? %>
+
+    <div class="post-form">
+      <% if flash[:errors] %>
+      <h2>Errors: </h2>
+      <ul>
+        <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+      <% end %>
+
+      <%= form_for @post do |f| %>
+        <%= f.label "Title (Required)" %><br>
+        <%= f.text_field :title %><br>
+        <br>
+        <%= f.label "URL (Optional)" %><br>
+        <%= f.text_field :url %><br>
+        <br>
+        <%= f.label "Description (Optional)" %><br>
+        <%= f.text_area :content %><br>
+
+        <%= f.label "Topic (Required)" %><br>
+        <%= f.collection_select :topic_id, @topics, :id, :name %>
+        <br><br>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+
+  <% else %>
+    <div class="empty_posts">Please <%= link_to "login", login_path %> first.</div>
   <% end %>
-
-  <%= form_for @post do |f| %>
-    <%= f.label "Title (Required)" %><br>
-    <%= f.text_field :title %><br>
-    <br>
-    <%= f.label "URL (Optional)" %><br>
-    <%= f.text_field :url %><br>
-    <br>
-    <%= f.label "Description (Optional)" %><br>
-    <%= f.text_area :content %><br>
-
-    <%= f.label "Topic (Required)" %><br>
-    <%= f.collection_select :topic_id, @topics, :id, :name %>
-    <br><br>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.submit %>
-  <% end %>
-
-<% else %>
-  <div>Please <%= link_to "login", login_path %> first.</div>
-<% end %>
+</div>
