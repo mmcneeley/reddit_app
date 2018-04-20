@@ -5,7 +5,7 @@ require 'obscenity/active_model'
   belongs_to :topic
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
-  has_many :post_tags
+  has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
   validates :title, presence: true
