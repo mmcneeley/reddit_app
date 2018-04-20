@@ -15,3 +15,63 @@
  */
 
 @import 'bootstrap';
+
+.orangish-nav {
+  background-color: #FF790F !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #FFF;
+  margin-left:10px;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #2D414C;
+}
+
+.jumbotron {
+  padding: 1rem 1rem;
+  background-color: #F7F8F8;
+  color: #2D414C;
+}
+
+.jumbotron h1 {
+    float: left;
+    font-size: 1.6rem;
+}
+
+.search-box {
+  float: right;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#logo-image {
+  max-height: 40px;
+  max-width: 60px;
+  margin-top: -10px;
+}
+
+.dark-footer {
+  margin-top: 20px;
+  background-color: #2D414C;
+  color: #EAECED;
+}
+
+.dark-footer a {
+  color: #EAECED;
+  text-decoration: underline;
+}
+
+.post-box {
+  border: 5px solid red;
+  margin: 20px;
+  padding: 20px;
+  max-width: 300px;
+  word-wrap: break-word;
+  float: left;
+}

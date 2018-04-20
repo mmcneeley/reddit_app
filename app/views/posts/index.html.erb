@@ -1,32 +1,32 @@
-<div class='jumbotron text-center'><h1>The Current Posts on Wroteit</h1></div>
-<div class="container-fluid">
-  <ul>
-    <%= form_tag posts_path, method: "get" do %>
-      <%= label_tag :q, "Search By Tag:" %><br>
-      <br>
-      <%= text_field_tag :search, params[:search] %><br>
-      <br>
-      <%= submit_tag "Search" %>
-    <% end %> <br>
-  </ul>
-  <ul>
-    <% @posts.each do |post| %>
-    <li>
-      <ul>
-        <li><%= link_to post.title, post %></li>
-        <li>Score: <%= post.score %> | <%= link_to "Up", post_votes_up_path(post), method:'post' %> | <%= link_to "Down", post_votes_down_path(post), method:'post' %></li>
-        <li>Content: <%= post.content %></li>
-        <li>URL: <%= post.url %></li>
-        <li>Scraped Tags: <%= post.tags.map {|tag| tag.name}.join(", ") %></li>
-        <li>Scraped Image: <%= post.image_url %></li>
-        <li>Scraped Title: <%= post.link_title %></li>
-        <li><%= link_to "delete", post, method: "delete" %></li>
-      </ul>
-    </li>
-    <% end %>
-  </ul>
-  <hr>
+<div class='jumbotron text-left clearfix'>
+  <h1>All Posts</h1>
   <%= button_tag(type: 'submit', class: "btn btn-dark") do %>
     <i class="icon-ok icon-white"><%= link_to "Create Post", new_post_path %></i>
   <% end %>
+  <div class="search-box">
+    <%= form_tag posts_path, method: "get" do %>
+      <%= text_field_tag :search, params[:search], placeholder: "e.g. sports" %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+</div>
+<div class="container-fluid">
+
+  <div class="clearfix">
+    <% @posts.each do |post| %>
+    <div class="post-box">
+        <ul>
+          <li><%= link_to post.title, post %></li>
+          <li>Score: <%= post.score %> | <%= link_to "Up", post_votes_up_path(post), method:'post' %> | <%= link_to "Down", post_votes_down_path(post), method:'post' %></li>
+          <li>Content: <%= post.content %></li>
+          <li>URL: <%= post.url %></li>
+          <li>Scraped Tags: <%= post.tags.map {|tag| tag.name}.join(", ") %></li>
+          <li>Scraped Image: <%= post.image_url %></li>
+          <li>Scraped Title: <%= post.link_title %></li>
+          <li><%= link_to "delete", post, method: "delete" %></li>
+        </ul>
+    </div>
+    <% end %>
+  </div>
+
 </div>
