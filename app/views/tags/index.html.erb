@@ -1,22 +1,17 @@
-<div class='jumbotron text-center'><h1>Tags:</h1></div>
-<div class="container-fluid">
-
-  <ul>
+<div class='jumbotron text-left clearfix'>
+  <h1>All Tags</h1>
+  <div class="search-box">
     <%= form_tag '', method: "get" do %>
-      <%= label_tag :q, "Filter Tags:" %><br>
-      <br>
-      <%= text_field_tag :search, params[:search] %><br>
-      <br>
-      <%= submit_tag "Filter" %>
-    <% end %> <br>
-  </ul>
-
-  <ul>
-    <% @tags.each do |tag| %>
-    <li>
-      <%= link_to tag.name, tag %>
-    </li>
+      <%= text_field_tag :search, params[:search], placeholder: "e.g. sports" %>
+      <%= submit_tag "Filter Tags" %>
     <% end %>
-  </ul>
-  <hr>
+  </div>
+</div>
+
+<div class="flex-container clearfix">
+  <% @tags.each do |tag| %>
+  <div class="tags-box">
+    <%= link_to tag.name, tag %>
+  </div>
+  <% end %>
 </div>

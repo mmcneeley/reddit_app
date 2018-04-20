@@ -16,6 +16,9 @@
 
 @import 'bootstrap';
 
+body {
+  background-color: #2D414C !important;
+  
 .background_signup{
   background-image: url("readers_d.jpg");
   height: 100%;
@@ -87,11 +90,15 @@
   padding: 1rem 1rem;
   background-color: #F7F8F8;
   color: #2D414C;
+  height: auto;
+  margin-bottom: auto;
+  border-radius: 0 !important;
 }
 
 .jumbotron h1 {
     float: left;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
+    margin-right: 10px;
 }
 
 .search-box {
@@ -105,8 +112,8 @@
 }
 
 #logo-image {
-  max-height: 40px;
-  max-width: 60px;
+  max-height: 50px;
+  max-width: 70px;
   margin-top: -10px;
 }
 
@@ -121,11 +128,174 @@
   text-decoration: underline;
 }
 
-.post-box {
-  border: 5px solid red;
-  margin: 20px;
-  padding: 20px;
-  max-width: 300px;
+.flex-container {
+  display: flex;
+  align-items: stretch;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0px;
+  margin: 0px;
+  background-color: #fff !important;
+}
+
+.flex-container > .tags-box {
+  border-radius: 5px;
+  border: 1px solid #8EBBFD;
+  background-color:#8EBBFD;
+  margin: 50px;
+  padding-bottom: 35px;
+  min-width: 250px;
+  width:17%;
   word-wrap: break-word;
   float: left;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tags-box a {
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  position: relative;
+  top: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.flex-container > .users-box {
+  border-radius: 5px;
+  border: 1px solid #FFD12B;
+  background-color:#FFD12B;
+  margin: 50px;
+  padding-bottom: 35px;
+  min-width: 250px;
+  width:17%;
+  word-wrap: break-word;
+  float: left;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.users-box a {
+  color: #333;
+  font-weight: bold;
+  font-size: 2rem;
+  position: relative;
+  top: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.flex-container > .topics-box {
+  border-radius: 5px;
+  border: 1px solid #FF7F73;
+  background-color:#FF7F73;
+  margin: 50px;
+  padding-bottom: 35px;
+  min-width: 250px;
+  width:17%;
+  word-wrap: break-word;
+  float: left;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.topics-box a {
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  position: relative;
+  top: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.flex-container > .post-box {
+  border-radius: 5px;
+  border: 1px solid #2D414C;
+  margin: 25px;
+  padding-bottom: 35px;
+  min-width: 250px;
+  width:17%;
+  word-wrap: break-word;
+  float: left;
+  position: relative;
+}
+
+.post-title-box {
+  background-color: #2D414C;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 200;
+  width: 100%;
+  padding: 15px;
+}
+
+.post-title {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 200;
+  display: block;
+}
+
+.post-title-content {
+  font-size: .8rem;
+  font-weight: normal;
+}
+
+.post-title-content a {
+  color: white;
+  text-decoration: underline;
+}
+
+.post-link-title {
+
+}
+
+.post-title a {
+  color: white;
+}
+
+.post-image {
+  max-width: 100%;
+}
+
+.post-score {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 7px;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.score {
+  font-size: 2rem;
+  color:green;
+  margin: 0 15px;
+  position: relative;
+  top: 4px;
+}
+
+.link-content {
+  padding: 15px;
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom:10px;
+}
+
+.delete {
+  position: absolute;
+  top: -15px;
+  right:0px;
+  font-size:.6em;
+  color: #333;
+}
+
+.empty_posts {
+  margin: 75px;
+  font-size: 3rem;
 }
