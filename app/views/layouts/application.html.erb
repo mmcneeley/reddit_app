@@ -11,16 +11,9 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-      <!-- Brand -->
-      <a class="navbar-brand" href="<%=login_path%>">Wroteit</a>
-      <!-- Toggler/collapsibe Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- nav links -->
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark orangish-nav">
+      <a class="navbar-brand" href="<%=posts_path%>"><%= image_tag "wroteit.png", id: "logo-image" %></a>
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="<%=users_path%>">Users</a>
           </li>
@@ -34,17 +27,18 @@
             <a class="nav-link" href="<%=tags_path%>">Tags</a>
           </li>
         </ul>
-      </div>
-    </nav>
+        <span class="navbar-text text-right">
+          <% if logged_in? %>
+          Signed in as <%= link_to current_user.username, current_user %> | <%= link_to "Logout", logout_path, method: "post" %>
+          <% else %>
+          <%= link_to 'Signup', '/signup' %>
+          <% end %>
+        </span>
+      </nav>
 
     <%= yield %>
-    <br>
-    <hr>
-    <% if logged_in? %>
-    Signed in as <%= link_to current_user.username, current_user %> | <%= link_to "Logout", logout_path, method: "post" %>
-    <% else %>
-    <%= link_to 'Signup', '/signup' %>
-    <% end %>
-
+    <div class="footer-copyright py-3 text-center dark-footer">
+          ...and now you <a href="http://www.reddit.com">Reddit</a>
+      </div>
   </body>
 </html>
