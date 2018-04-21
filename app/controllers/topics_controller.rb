@@ -16,6 +16,7 @@ before_action :get_topic, only:[:show]
   end
 
   def show
+    @posts = @topic.posts
   end
 
 
@@ -28,6 +29,5 @@ before_action :get_topic, only:[:show]
   def get_topic
     @topic = Topic.find(params[:id])
   end
-
 
 end

@@ -1,22 +1,19 @@
-<div class="jumbotron text-center"><h1><%= @user.username%></h1></div>
-<h3>Email: <%= @user.email %></h3>
+<div class='jumbotron text-left clearfix'>
+  <h1><%=@user.username%> - <%= @user.email %></h1>
+  <%= button_tag(type: 'submit', class: "btn btn-light") do %>
+    <i class="icon-ok icon-white"><%= link_to "Edit User", edit_user_path(@user) %></i>
+  <% end %>
+  <div class="search-box">
+  </div>
+</div>
 
-<% if flash[:success] %>
-  <h2>Success</h2>
-  <p><%= flash[:success] %></p>
-<% end %>
-
-<div class="container-fluid">
+<div class="post-shell">
 <% if @user.posts  %>
-  <div class=""><h3>Posts</h3>
+  <h3>Posts</h3>
     <ul>
     <% @user.posts.each do |post| %>
       <li> <%= link_to post.title, post %> </li>
     <% end %>
     </ul>
 <% end %>
-<hr>
- <%= button_tag(type: 'submit', class: "btn btn-dark") do %>
-  <i class="icon-ok icon-white"> <%= link_to "Edit User", edit_user_path %></i>
- <% end %>
- </div>
+</div>

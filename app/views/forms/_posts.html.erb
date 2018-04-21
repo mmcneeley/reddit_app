@@ -1,0 +1,30 @@
+<div class="flex-container clearfix">
+  <% if @posts.last != nil %>
+    <% @posts.each do |post| %>
+    <div class="post-box">
+      <div class="post-title-box">
+        <span class="post-title"><%= link_to post.title.titlecase, post %></span>
+        <span class="post-title-content"><%= post.content %> by <%= link_to post.user.username, post.user %></span>
+      </div>
+      <% if post.image_url %>
+        <%= image_tag post.image_url, class: "post-image" %>
+      <% end %>
+      <div class="link-content">
+        <a href="<%= post.url %>"><%= post.link_title %></a>
+      </div>
+      <div class="post-score">
+        <%= link_to "Vote Up!", post_votes_up_path(post), method:'post' %>
+        <span class="score"><%= post.score %></span>
+        <%= link_to "Vote Down!", post_votes_down_path(post), method:'post' %></li>
+      </div>
+      <div class="delete">
+        <%= link_to "delete", post, method: "delete" %>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+    <div class="empty_posts">
+      Be the first to <%= link_to "add a post", new_post_path %>!
+    </div>
+  <% end %>
+</div>

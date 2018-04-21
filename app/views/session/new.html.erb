@@ -1,17 +1,15 @@
-
-
-<div class="jumbotron text-center"><h1> Welcome to Wroteit </h1> <h4>A free social web-app that allows users to share the latest news</h4> <p>[Please Login or Sign-Up via the link below]</p></div>
-
-<div class="container-fluid">
-<%= form_tag sessions_path do %>
-<%=label_tag :username%>
-<%=text_field_tag :username %>
-<%=label_tag :password%>
-<%=password_field_tag :password%>
-<br>
-<hr>
-<%= button_tag(type: 'submit', class: "btn btn-dark") do %>
- <i class="icon-ok icon-white"></i> Login
-<% end %>
-<% end %>
+<div class="background_awesome">
+  <div class="login_lol">
+    <%= image_tag "wroteit.png", id: "logos"%><br>
+    <%= form_tag sessions_path do %>
+      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      Username: <br>
+      <%= text_field_tag :username %><br>
+      Password: <br>
+      <%= password_field_tag :password %><br>
+      <hr>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -1,15 +1,16 @@
-<div class="jumbotron text-center"><h1>Sign Up for a new account on Wroteit</h1></div>
-<hr>
-<div class="container-fluid">
- <%= form_for @user do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <br>
-  <hr>
-  <%= f.submit "Sign Up" %>
- <% end %>
+<div class="background_signup">
+  <div class="sign_up">
+  <%= image_tag "wroteit.png", id: "logos"%><br>
+   <%= form_for @user do |f| %>
+    <h1 class="h3 mb-3 font-weight-normal">Sign Up!</h1>
+    <p> Username: </p>
+    <%= f.text_field :username %><br>
+    <p> Password: </p>
+    <%= f.password_field :password %><br>
+    <p> Confirm Password: </p>
+    <%= f.password_field :password_confirmation %><br>
+    <hr>
+    <%= f.submit %>
+   <% end %>
+ </div>
 </div>

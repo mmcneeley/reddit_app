@@ -10,7 +10,8 @@ class PostsController < ApplicationController
     if params[:search]
       @posts = Post.search(params[:search])
     else
-      @posts = Post.all
+      @posts = Post.all.order(id: :desc)
+      @posts
     end
   end
 
